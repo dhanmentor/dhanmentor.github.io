@@ -12,6 +12,134 @@
             font-family: Helvetica, Arial, sans-serif;
         }
 
+	.enquiry-panel {
+            position: fixed;
+            top: 50%;
+            right: 0;
+            transform: translateY(-50%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background: linear-gradient(135deg, #3493f9, #70bf4f);
+            border-radius: 16px 0 0 16px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+            padding: 10px 5px;
+        }
+
+        .whatsapp {
+            margin: 10px 0;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+
+        .whatsapp:hover {
+            transform: scale(1.1);
+        }
+
+        .whatsapp img {
+            width: 50px;
+            height: 50px;
+        }
+
+        .enquire-now {
+            writing-mode: vertical-rl;
+            text-orientation: mixed;
+            padding: 12px;
+            color: white;
+            background: #ec1414;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: bold;
+            animation: pulse 2s infinite;
+            text-align: center;
+            font-size: 16px;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+                box-shadow: 0 0 10px rgba(236, 20, 20, 0.5);
+            }
+            50% {
+                transform: scale(1.1);
+                box-shadow: 0 0 20px rgba(236, 20, 20, 0.8);
+            }
+            100% {
+                transform: scale(1);
+                box-shadow: 0 0 10px rgba(236, 20, 20, 0.5);
+            }
+        }
+
+        .popup {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 350px;
+            padding: 25px;
+            background: #fff;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+            border-radius: 12px;
+            z-index: 1000;
+        }
+
+        .popup.active {
+            display: block;
+        }
+
+        .popup form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .popup input, .popup textarea {
+            margin-bottom: 15px;
+            padding: 10px;
+            font-size: 14px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            outline: none;
+            transition: border-color 0.3s;
+        }
+
+        .popup input:focus, .popup textarea:focus {
+            border-color: #3493f9;
+        }
+
+        .popup button {
+            padding: 12px;
+            color: white;
+            background-color: #3493f9;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: bold;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+            transition: background-color 0.3s;
+        }
+
+        .popup button:hover {
+            background-color: #2677d9;
+        }
+
+        .overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 999;
+        }
+
+        .overlay.active {
+            display: block;
+        }
+
         .navbar {
             background-color: rgb(255, 255, 255);
             padding: 0.5rem;
@@ -321,6 +449,27 @@
         <p style="text-align:justify;">DhanMentor is your go-to financial consulting partner that helps your business achieve sustained growth. We offer personalized services tailored to your specific needs, ensuring that your business remains compliant with the latest regulations and operates at maximum efficiency. Our virtual CFOs and accountants are ready to take the burden off your shoulders, giving you more time to focus on your core business activities.</p>
     </div>
 
+    <div class="enquiry-panel">
+    <a href="https://wa.me/7301073287" target="_blank" class="whatsapp">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp">
+    </a>
+    <button class="enquire-now" onclick="togglePopup()">Enquire Now</button>
+</div>
+
+<div class="overlay" id="overlay" onclick="togglePopup()"></div>
+
+<div class="popup" id="popup">
+    <form action="https://api.web3forms.com/submit" method="POST">
+        <input type="hidden" name="access_key" value="2ed19e4d-b04c-4a41-a4b4-ee06f9207426">
+        <input type="text" name="name" placeholder="Name" required>
+        <input type="email" name="email" placeholder="Email Id" required>
+        <input type="text" name="mobile" placeholder="Mobile Number" required>
+        <textarea name="message" placeholder="Query" required></textarea>
+        <input type="hidden" name="redirect" value="https://web3forms.com/success">
+        <button type="submit">Submit Form</button>
+    </form>
+</div>
+
     <footer class="dark-footer">
         <div class="container">
             <div class="row">
@@ -356,6 +505,14 @@
     </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+   <script>
+    function togglePopup() {
+        const popup = document.getElementById('popup');
+        const overlay = document.getElementById('overlay');
+        popup.classList.toggle('active');
+        overlay.classList.toggle('active');
+    }
+</script>
 </body>
 
 </html>
